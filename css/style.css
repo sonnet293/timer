@@ -10,6 +10,10 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
     padding: 16px;
@@ -18,7 +22,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100%;
+    height: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     color: #333;
 }
 
@@ -148,7 +155,7 @@ body {
     color: #fff;
 }
 
-select.interval-select {
+select.auto-msg-select {
     border: none;
     border-radius: 20px;
     padding: 8px 12px;
@@ -156,6 +163,15 @@ select.interval-select {
     font-size: 14px;
     background: #eee;
     color: #555;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select.auto-msg-select.active {
+    background: #ff9f68;
+    color: #fff;
 }
 
 /* ===== 타이머 ===== */

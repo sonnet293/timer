@@ -101,20 +101,17 @@ function playAlarmSound() {
 }
 
 /* =========================================================
-   자동 대사 모드 (3 / 5 / 10 / 30분 간격)
+   자동 대사 모드 (OFF / 3 / 5 / 10 / 30분 간격)
 ========================================================= */
-const autoMsgBtn = document.getElementById("autoMsgToggle");
-const intervalSelect = document.getElementById("autoMsgInterval");
+const autoMsgSelect = document.getElementById("autoMsgSelect");
 
 let autoMsgOn = localStorage.getItem("app_auto_msg") === "true";
 let autoMsgInterval = parseInt(localStorage.getItem("app_auto_msg_min") || "5", 10);
 let autoMsgTimer = null;
 
-intervalSelect.value = String(autoMsgInterval);
-
-function renderAutoMsgBtn() {
-    autoMsgBtn.textContent = autoMsgOn ? "💬 자동대사 ON" : "💬 자동대사 OFF";
-    autoMsgBtn.classList.toggle("active", autoMsgOn);
+function renderAutoMsgSelect() {
+    autoMsgSelect.value = autoMsgOn ? String(autoMsgInterval) : "off";
+    autoMsgSelect.classList.toggle("active", autoMsgOn);
 }
 
 function startAutoMsg() {
@@ -131,24 +128,24 @@ function stopAutoMsg() {
     }
 }
 
-renderAutoMsgBtn();
+renderAutoMsgSelect();
 if (autoMsgOn) startAutoMsg();
 
-autoMsgBtn.addEventListener("click", () => {
-    autoMsgOn = !autoMsgOn;
-    localStorage.setItem("app_auto_msg", autoMsgOn);
-    renderAutoMsgBtn();
-    if (autoMsgOn) {
-        startAutoMsg();
-    } else {
-        stopAutoMsg();
-    }
-});
+autoMsgSelect.addEventListener("change", () => {
+    const selectedValue = autoMsgSelect.value;
 
-intervalSelect.addEventListener("change", () => {
-    autoMsgInterval = parseInt(intervalSelect.value, 10);
-    localStorage.setItem("app_auto_msg_min", autoMsgInterval);
-    if (autoMsgOn) startAutoMsg(); // 실행 중이면 새 간격으로 재시작
+    if (selectedValue === "off") {
+        autoMsgOn = false;
+        stopAutoMsg();
+    } else {
+        autoMsgOn = true;
+        autoMsgInterval = parseInt(selectedValue, 10);
+        localStorage.setItem("app_auto_msg_min", autoMsgInterval);
+        startAutoMsg();
+    }
+
+    localStorage.setItem("app_auto_msg", autoMsgOn);
+    renderAutoMsgSelect();
 });
 
 /* =========================================================
