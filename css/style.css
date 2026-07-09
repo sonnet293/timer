@@ -1,0 +1,320 @@
+@font-face {
+    font-family: 'OngleipParkDahyeon';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2') format('woff2');
+    font-weight: normal;
+    font-display: swap;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    padding: 16px;
+    background: #fff8f2;
+    font-family: 'OngleipParkDahyeon', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.app {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ===== 캐릭터 영역 ===== */
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    touch-action: manipulation;
+    margin-top: 30px; /* 말풍선이 위로 뜰 최소 공간만 확보 */
+}
+
+.image-wrapper img {
+    width: 60vw;
+    max-width: 260px;
+    height: auto;
+    border-radius: 16px;
+    display: block;
+}
+
+.click-bubble {
+    position: absolute;
+    bottom: 105%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 12px 18px;
+    border-radius: 20px;
+    font-family: 'OngleipParkDahyeon', sans-serif;
+    font-size: clamp(14px, 4vw, 20px);
+    max-width: 95vw;
+    text-align: center;
+    white-space: pre-line;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 5;
+}
+
+.click-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 8px 0 8px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+.pop-character {
+    animation: bubblePop 0.25s ease-out;
+}
+
+@keyframes bubblePop {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(0.92); }
+    70%  { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pop-bubble {
+    animation: bubblePopBubble 0.25s ease-out;
+}
+
+@keyframes bubblePopBubble {
+    0%   { transform: translateX(-50%) scale(1); }
+    30%  { transform: translateX(-50%) scale(0.92); }
+    70%  { transform: translateX(-50%) scale(1.05); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
+.show {
+    opacity: 1;
+}
+
+/* ===== 공통 카드 ===== */
+.card {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.card h2 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ===== 상단 옵션 바 ===== */
+.option-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+.toggle-btn {
+    border: none;
+    border-radius: 20px;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #eee;
+    color: #555;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.toggle-btn.active {
+    background: #ff9f68;
+    color: #fff;
+}
+
+select.interval-select {
+    border: none;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #eee;
+    color: #555;
+}
+
+/* ===== 타이머 ===== */
+.timer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.timer-item {
+    border: 1px solid #f0e6dd;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.timer-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timer-mode-select {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-family: inherit;
+    font-size: 13px;
+    background: #fafafa;
+}
+
+.timer-delete {
+    border: none;
+    background: none;
+    color: #bbb;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.timer-delete:hover { color: #ff6b6b; }
+
+.timer-display {
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #444;
+}
+
+.timer-pomodoro-label {
+    text-align: center;
+    font-size: 13px;
+    color: #ff9f68;
+}
+
+.timer-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+}
+
+.timer-inputs input {
+    width: 56px;
+    text-align: center;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.timer-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.timer-buttons button {
+    flex: 1;
+    padding: 8px 0;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    background: #ff9f68;
+    color: white;
+}
+
+.timer-buttons button.secondary {
+    background: #eee;
+    color: #555;
+}
+
+.add-timer-btn {
+    width: 100%;
+    padding: 10px 0;
+    border: 2px dashed #ffbb95;
+    border-radius: 12px;
+    background: #fff8f2;
+    color: #ff9f68;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.add-timer-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ===== 메모 ===== */
+.memo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.memo-item {
+    position: relative;
+}
+
+.memo-item textarea {
+    width: 100%;
+    min-height: 70px;
+    resize: vertical;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 10px 30px 10px 10px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #fffdf9;
+}
+
+.memo-delete {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    border: none;
+    background: none;
+    color: #ccc;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.memo-delete:hover { color: #ff6b6b; }
+
+.memo-count {
+    font-size: 13px;
+    color: #aaa;
+    font-weight: normal;
+}
+
+@media (max-width: 380px) {
+    .timer-display { font-size: 26px; }
+    .card { padding: 12px; }
+}

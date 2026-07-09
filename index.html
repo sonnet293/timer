@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>캡틴 르네상스와 함께하는 타이머</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="app">
+
+    <!-- 캐릭터 -->
+    <div class="image-wrapper" id="character">
+        <img src="img/페르마타 2.png" alt="캐릭터" width="300">
+        <div class="click-bubble" id="bubble"></div>
+    </div>
+
+    <!-- 상단 옵션 (무음모드 / 자동대사) -->
+    <div class="option-bar">
+        <button id="muteToggle" class="toggle-btn"></button>
+        <button id="autoMsgToggle" class="toggle-btn"></button>
+        <select id="autoMsgInterval" class="interval-select">
+            <option value="3">3분마다</option>
+            <option value="5">5분마다</option>
+            <option value="10">10분마다</option>
+            <option value="30">30분마다</option>
+        </select>
+    </div>
+
+    <!-- 타이머 영역 -->
+    <div class="card">
+        <h2>⏱ 타이머</h2>
+        <div class="timer-list" id="timerList"></div>
+        <br>
+        <button class="add-timer-btn" id="addTimerBtn">+ 타이머 추가</button>
+    </div>
+
+    <!-- 메모 영역 -->
+    <div class="card">
+        <h2>📝 메모 <span class="memo-count" id="memoCount"></span></h2>
+        <div class="memo-list" id="memoList"></div>
+        <br>
+        <button class="add-timer-btn" id="addMemoBtn">+ 메모 추가</button>
+    </div>
+
+</div>
+
+<script src="js/timer.js"></script>
+<script src="js/memo.js"></script>
+</body>
+</html>
