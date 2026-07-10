@@ -44,7 +44,7 @@ body {
     display: inline-block;
     cursor: pointer;
     touch-action: manipulation;
-    margin-top: 30px; /* 말풍선이 위로 뜰 최소 공간만 확보 */
+    margin-top: 120px;
 }
 
 .image-wrapper img {
@@ -55,59 +55,101 @@ body {
     display: block;
 }
 
+/* ===== 말풍선 ===== */
 .click-bubble {
     position: absolute;
-    bottom: 105%;
+    bottom: 80%;
     left: 50%;
     transform: translateX(-50%);
+
+    /* 짧은 대사는 작게, 긴 대사는 넓게 */
+    width: max-content;
+    max-width: min(420px, calc(100vw - 32px));
+
+    box-sizing: border-box;
     background: white;
-    padding: 12px 18px;
-    border-radius: 20px;
+    padding: 16px 24px;
+    border-radius: 24px;
+
     font-family: 'OngleipParkDahyeon', sans-serif;
-    font-size: clamp(14px, 4vw, 20px);
-    max-width: 95vw;
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 1.4;
+
     text-align: center;
+
+    /* 줄바꿈 */
     white-space: pre-line;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s ease;
     z-index: 5;
 }
 
+/* ===== 말풍선 꼬리 ===== */
 .click-bubble::after {
     content: '';
     position: absolute;
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
+
     border-width: 10px 8px 0 8px;
     border-style: solid;
     border-color: white transparent transparent transparent;
 }
 
+/* ===== 캐릭터 클릭 애니메이션 ===== */
 .pop-character {
     animation: bubblePop 0.25s ease-out;
 }
 
 @keyframes bubblePop {
-    0%   { transform: scale(1); }
-    30%  { transform: scale(0.92); }
-    70%  { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(0.92);
+    }
+
+    70% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
+/* ===== 말풍선 클릭 애니메이션 ===== */
 .pop-bubble {
     animation: bubblePopBubble 0.25s ease-out;
 }
 
 @keyframes bubblePopBubble {
-    0%   { transform: translateX(-50%) scale(1); }
-    30%  { transform: translateX(-50%) scale(0.92); }
-    70%  { transform: translateX(-50%) scale(1.05); }
-    100% { transform: translateX(-50%) scale(1); }
+    0% {
+        transform: translateX(-50%) scale(1);
+    }
+
+    30% {
+        transform: translateX(-50%) scale(0.92);
+    }
+
+    70% {
+        transform: translateX(-50%) scale(1.05);
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
 }
 
+/* ===== 말풍선 표시 ===== */
 .show {
     opacity: 1;
 }
